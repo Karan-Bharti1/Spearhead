@@ -1,0 +1,16 @@
+:root{
+  --primary-color:#4c1d95;
+  --text-color-:#F9FAFB;
+}
+.heading{
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
+  color: var(--text-color-);
+}
+.header{
+  background-color: var(--primary-color);
+ margin:0px;
+ border: 0px;
+  padding: 1.3rem;
+}
