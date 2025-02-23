@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-     <Header/>
+     <Header text={"CRM Dashboard"}/>
     </>
   )
 }
