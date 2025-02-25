@@ -1,8 +1,9 @@
-import { useState } from 'react'
+
 
 import './App.css'
 import Header from './components/Header'
 import { Link } from 'react-router-dom'
+import LeadView from './features/leads/LeadView'
 
 function App() {
   
@@ -20,7 +21,9 @@ function App() {
 <Link className='btn-primary'>Reports</Link>
 <Link className='btn-primary'>Settings</Link>
   </div>
-  <div className='content'></div>
+  <div className='content'>
+    <LeadView/>
+  </div>
 </div>
      </main>
     </>

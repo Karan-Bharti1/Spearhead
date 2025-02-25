@@ -1,0 +1,1 @@
+export const leadURL="https://spearhead-backend.vercel.app/leads"
