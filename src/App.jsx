@@ -20,7 +20,7 @@ function App() {
 <Link className='btn-primary'>Reports</Link>
 <Link className='btn-primary'>Settings</Link>
   </div>
-  <div className='conten'></div>
+  <div className='content'></div>
 </div>
      </main>
     </>
