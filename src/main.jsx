@@ -5,10 +5,14 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store.js'
+import ViewDetail from './pages/ViewDetail.jsx'
 const router=createBrowserRouter([{
 
   path:"/",
   element:<App/>
+},{
+  path:"/viewdetails/:id",
+  element:<ViewDetail/>
 }])
 createRoot(document.getElementById('root')).render(
   <StrictMode>

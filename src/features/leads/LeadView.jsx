@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLeads } from "./leadSlice";
+import { Link } from "react-router-dom";
 
 const LeadView=()=>{
     const [filter,setFilter]=useState("")
@@ -30,9 +31,12 @@ return matchesFilter
                 (<span key={index} className="tag">{tag.name}</span>))}
                  <p className="card-text"><span className="text-head">Time To Close:</span> {lead.timeToClose}</p>
                  <p className="card-text"><span className="text-head">Priority:</span> {lead.priority}</p>
+                 <Link className="link-display" to={`/viewdetails/${lead._id}`}>View Details</Link>
             </div>)
             })
 return(<>
+{state.status==="loading" && (<>
+<h2 className="load">Loading...</h2></>)}
 {state.status==="succeeded" &&(<><p className="main-heading">Leads Management System</p>
     <div className="lead-status">
 
@@ -50,6 +54,7 @@ return(<>
 </div>
 <div className="lead-filter">
 <p><strong>Leads</strong></p>
+
 <div>
 <label htmlFor="filter"><strong>Quick Filter:</strong> </label>
 <select id="filter" onChange={event=>setFilter(event.target.value)}>
@@ -60,10 +65,10 @@ return(<>
     <option value="Qualified">Qualified</option>
     <option value="Closed">Closed</option>
 </select>
-</div></div>
+</div>
+<div><Link className="link-display">Add New Lead</Link></div></div>
 
 <div className="lead-container">
-
 {
 displayLeads}
 </div>

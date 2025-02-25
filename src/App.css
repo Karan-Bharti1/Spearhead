@@ -1,7 +1,8 @@
 :root{
   --primary-color:#27272a;
   --text-color-:#F9FAFB;
-  
+  --tag-color-:#15803d;
+  --card-text-:darkred;
 }
 .header{
   justify-content: space-evenly;
@@ -17,6 +18,9 @@
   font-size: x-large;
   font-weight: bolder;
   color: var(--text-color-);
+}
+.load{
+  text-align: center;
 }
 .head-text{
   font-size: x-large;
@@ -112,13 +116,27 @@ color: var(--text-color-);
 }
 .tag{
   padding: 0.5rem;
-  background-color: var(--primary-color);
+  background-color: var(--tag-color-);
   color:var(--text-color-);
   margin:0.2rem;
   border-radius: 2px;
 }
 .text-head{
-  color:darkred;
+  color:var(--card-text-);
+}
+.link-display{
+  padding: 0.3rem;
+text-decoration: none;
+background-color: var(--primary-color);
+color: var(--text-color-);
+border-radius: 3px;
+}
+.link-display:hover{
+background-color: var(--text-color-);
+color: var(--primary-color);
+border: 1px solid var(--primary-color);
+border-radius: 3px;
+
 }
 @media (max-width:768px) {
 .heading{
@@ -155,5 +173,6 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
 }
+
 
 }
