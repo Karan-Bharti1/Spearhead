@@ -4,19 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchLeads } from "../features/leads/leadSlice";
 import { Link } from "react-router-dom";
+import { fetchComments } from "../features/comments/CommentSlice";
 const ViewDetail=()=>{
     const {id}=useParams()
     const dispatch=useDispatch()
     const [leadData,setLeadData]=useState({})
-    const state=useSelector(state=>state.leads)
+    const [commentsData,setCommentsData]=useState([])
+    const {leads:state,comments}=useSelector(state=>state)
+    
     useEffect(()=>{
         dispatch(fetchLeads())
-    },[])
+        dispatch(fetchComments(id))
+    },[id,dispatch])
     useEffect(()=>{
 const required=state.leads?.find(lead=>lead._id===id)
 setLeadData(required)
-console.log(leadData)
-    },[state.leads.length>0,leadData])
+
+    },[state.leads,id])
+    useEffect(()=>{
+setCommentsData(comments.comments)
+    },[comments.comments])
+    console.log(commentsData)
     return(<>
     <Header text={"Lead Details"}/>
    
@@ -55,9 +63,25 @@ console.log(leadData)
                 <div className="comment-container">
                     <form>
                         <textarea className="form-control" placeholder="Add a comment for the lead....." rows={10}></textarea>
+                        <button className="link-display">Submit</button>
                     </form>
                 </div>
+               
             </div>
+          {commentsData.length>0&&   (<div className="display-comment">
+            <p className="sec-heading">Recent Comments</p>
+                    {commentsData.map(comment=> (<div className="comment-box" key={comment._id}>
+                        <div className="comment-box-author-time">
+                        <p className="comment-text-profile">{comment.author.name}</p>
+                        <p className="comment-text">{new Date(comment.createdAt).toLocaleString()}</p>
+                        </div>
+                         <p ><span className="text-head"><strong>Remarks:</strong></span> {comment.commentText}</p>
+                         </div>)
+                    )}
+                </div>)}
+                {
+                    commentsData.length==0 && <p className="sec-heading">No comments available. </p>
+                }
            </>)}
         </div>
     </div>
