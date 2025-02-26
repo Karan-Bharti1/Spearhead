@@ -254,6 +254,12 @@ flex-direction: column;
 .content-container{
   display: flex;
   flex-direction:column;
- align-items:center;
+ align-content:stretch;
+}
+.sales-content{
+  align-self: start;
+}
+.edit-container{
+  padding-left: 0px;
 }
 }
