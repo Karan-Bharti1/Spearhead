@@ -5,6 +5,7 @@
   --card-text-:darkred;
   --disabled-text-:#52525b;
   --profile-color-:#1e40af;
+  --form-border-:hsl(0, 0%, 80%);
 }
 .header{
   justify-content: space-evenly;
@@ -165,9 +166,14 @@ border-radius: 3px;
   padding: 2rem;
   margin: 1rem 0rem;
 }
+.comment-container textarea{
+  padding: 0.5rem;
+}
 .form-control{
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem 0rem;
+  border: 1px solid var(--form-border-);
+  border-radius: 3px;
 }
 .display-comment{
   padding-left: 2rem;
@@ -185,11 +191,15 @@ border-radius: 3px;
 .comment-text{
   color: var(--disabled-text-);
 }
+
 .comment-text-profile{
   color:var(--profile-color-);
   font-weight: bolder;
  
 }
+.form{margin:0rem 2rem;
+padding: 4px 0px;}
+
 @media (max-width:768px) {
 .heading{
   font-size: larger;
@@ -247,6 +257,8 @@ flex-direction: column;
 .form-control{
   width: 100%;
   padding: 0rem;
+  padding-top: 0.3rem;
+  padding-bottom:0.3rem;
 }
 .display-comment{
   padding: 0rem;
@@ -261,5 +273,9 @@ flex-direction: column;
 }
 .edit-container{
   padding-left: 0px;
+}
+.form{margin: 0rem;}
+.comment-container textarea{
+  padding: 0rem;
 }
 }

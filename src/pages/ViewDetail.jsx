@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchLeads } from "../features/leads/leadSlice";
 import { Link } from "react-router-dom";
-import { fetchComments } from "../features/comments/CommentSlice";
+import { addComment, fetchComments } from "../features/comments/CommentSlice";
 const ViewDetail=()=>{
     const {id}=useParams()
     const dispatch=useDispatch()
     const [leadData,setLeadData]=useState({})
     const [commentsData,setCommentsData]=useState([])
     const {leads:state,comments}=useSelector(state=>state)
+    const [commentText,setCommentText]=useState("")
     
     useEffect(()=>{
         dispatch(fetchLeads())
@@ -24,7 +25,10 @@ setLeadData(required)
     useEffect(()=>{
 setCommentsData(comments.comments)
     },[comments.comments])
-    console.log(commentsData)
+   const  handleSubmit=(event)=>{
+    event.preventDefault()
+dispatch(addComment({id,data:{commentText:commentText}}))
+   }
     return(<>
     <Header text={"Lead Details"}/>
    
@@ -61,9 +65,9 @@ setCommentsData(comments.comments)
             <div>
                 <p className="sec-heading">Comment Box</p>
                 <div className="comment-container">
-                    <form>
-                        <textarea className="form-control" placeholder="Add a comment for the lead....." rows={10}></textarea>
-                        <button className="link-display">Submit</button>
+                    <form onClick={handleSubmit}>
+                        <textarea onChange={event=>setCommentText(event.target.value)} className="form-control" placeholder="Add a comment for the lead....." rows={10} required></textarea>
+                        <button className="link-display" type="submit">Submit</button>
                     </form>
                 </div>
                
@@ -80,7 +84,7 @@ setCommentsData(comments.comments)
                     )}
                 </div>)}
                 {
-                    commentsData.length==0 && <p className="sec-heading">No comments available. </p>
+                  comments.status!="loading" &&  commentsData.length==0 && <p className="sec-heading">No comments available. </p>
                 }
            </>)}
         </div>

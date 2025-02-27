@@ -66,7 +66,7 @@ return(<>
     <option value="Closed">Closed</option>
 </select>
 </div>
-<div><Link className="link-display">Add New Lead</Link></div></div>
+<div><Link className="link-display" to="/addnewlead">Add New Lead</Link></div></div>
 
 <div className="lead-container">
 {

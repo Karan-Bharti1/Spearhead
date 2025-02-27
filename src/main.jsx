@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store.js'
 import ViewDetail from './pages/ViewDetail.jsx'
+import AddNewLead from './pages/AddNewLead.jsx'
 const router=createBrowserRouter([{
 
   path:"/",
@@ -13,6 +14,9 @@ const router=createBrowserRouter([{
 },{
   path:"/viewdetails/:id",
   element:<ViewDetail/>
+},{
+  path:"/addnewlead",
+  element:<AddNewLead/>
 }])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
