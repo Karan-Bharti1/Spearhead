@@ -5,6 +5,15 @@ export const fetchLeads=createAsyncThunk("fetchLeads/Leads",async()=>{
     const response=await axios.get(leadURL)
     return response.data
 })
+export const addLead=createAsyncThunk("addLeads/leads",async(data)=>{
+    const response=await axios.post(leadURL,data,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        }
+    })
+    return response.data
+})
  export const leadSlice=createSlice({
     name:"Leads",
     initialState:{
@@ -22,6 +31,17 @@ builder.addCase(fetchLeads.fulfilled,(state,action)=>{
     state.leads=action.payload
 })
 builder.addCase(fetchLeads.rejected,(state,action)=>{
+    state.status="error"
+    state.error=action.payload
+})
+builder.addCase(addLead.pending,state=>{
+    state.status="loading"
+})
+builder.addCase(addLead.fulfilled,(state,action)=>{
+    state.status="succeeded"
+    state.leads.push(action.payload)
+})
+builder.addCase(addLead.rejected,(state,action)=>{
     state.status="error"
     state.error=action.payload
 })
