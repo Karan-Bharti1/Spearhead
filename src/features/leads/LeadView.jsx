@@ -27,8 +27,10 @@ return matchesFilter
             <p className="card-text"><span className="text-head">Sales Agent:</span> {lead.salesAgent.name}</p>
             <p className="card-text"><span className="text-head">Status:</span> {lead.status}</p>
             <p className="card-text"><span className="text-head">Tags:</span> </p>
+            <div className="tag-card">
             {lead.tags.map((tag,index)=>
                 (<span key={index} className="tag">{tag.name}</span>))}
+                </div>
                  <p className="card-text"><span className="text-head">Time To Close:</span> {lead.timeToClose}</p>
                  <p className="card-text"><span className="text-head">Priority:</span> {lead.priority}</p>
                  <Link className="link-display" to={`/viewdetails/${lead._id}`}>View Details</Link>
