@@ -12,7 +12,10 @@ const AddNewLead=()=>{
 dispatch(fetchSales())
 dispatch(fetchTags())
     },[dispatch])
-    const {sales,tags,leads}=useSelector(state=>state)
+    const leads = useSelector(state => state.leads);
+const tags = useSelector(state => state.tags);
+const sales = useSelector(state => state.sales);
+
 
     const [leadData,setLeadData]=useState({
         name:"",

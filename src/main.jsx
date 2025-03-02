@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import store from './store.js'
 import ViewDetail from './pages/ViewDetail.jsx'
 import AddNewLead from './pages/AddNewLead.jsx'
+import EditLead from './pages/EditLead.jsx'
 const router=createBrowserRouter([{
 
   path:"/",
@@ -17,6 +18,9 @@ const router=createBrowserRouter([{
 },{
   path:"/addnewlead",
   element:<AddNewLead/>
+},{
+  path:"/editlead/:id",
+  element:<EditLead/>
 }])
 createRoot(document.getElementById('root')).render(
   <StrictMode>

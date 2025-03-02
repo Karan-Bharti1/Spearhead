@@ -12,7 +12,7 @@ const ViewDetail=()=>{
     const [commentsData,setCommentsData]=useState([])
     const {leads:state,comments}=useSelector(state=>state)
     const [commentText,setCommentText]=useState("")
-    
+    console.log(comments)
     useEffect(()=>{
         dispatch(fetchLeads())
         dispatch(fetchComments(id))
@@ -28,6 +28,9 @@ setCommentsData(comments.comments)
    const  handleSubmit=(event)=>{
     event.preventDefault()
 dispatch(addComment({id,data:{commentText:commentText}}))
+if(comments.status==="succeeded"){
+    setCommentText("")
+}
    }
     return(<>
     <Header text={"Lead Details"}/>
@@ -60,13 +63,13 @@ dispatch(addComment({id,data:{commentText:commentText}}))
             </div>
             </div>
             <div className="edit-container">
-                <Link className="link-display">Edit Details</Link>
+                <Link className="link-display" to={`/editlead/${id}`}>Edit Details</Link>
             </div>
             <div>
                 <p className="sec-heading">Comment Box</p>
                 <div className="comment-container">
                     <form onClick={handleSubmit}>
-                        <textarea onChange={event=>setCommentText(event.target.value)} className="form-control" placeholder="Add a comment for the lead....." rows={10} required></textarea>
+                        <textarea  value={commentText} onChange={event=>setCommentText(event.target.value)} className="form-control" placeholder="Add a comment for the lead....." rows={10} required></textarea>
                         <button className="link-display" type="submit">Submit</button>
                     </form>
                 </div>

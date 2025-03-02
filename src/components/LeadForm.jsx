@@ -6,7 +6,7 @@ const LeadForm=({handleChange,handleSubmit,leadData,setLeadData,handleMultiDropD
 <input className="form-control" type="text"  name="name" id="name" value={leadData.name} onChange={handleChange}/>
 <br/><br/>
 <label htmlFor="source" className="text-head"><strong>Source:</strong></label>
-<select  id="source"  name="source" className="form-control" onChange={handleChange}>
+<select  id="source"  name="source" value={leadData.source} className="form-control" onChange={handleChange}>
 <option  value="">Select a field</option>
 <option value="Referral">Referral</option>
 <option value="Cold Call">Cold Call</option>
@@ -16,7 +16,7 @@ const LeadForm=({handleChange,handleSubmit,leadData,setLeadData,handleMultiDropD
 </select>
 <br/><br/>
 <label htmlFor="sales"  className="text-head"><strong>Sales Agent:</strong></label>
-<select  id="sales" name="salesAgent" className="form-control" onChange={handleChange}>
+<select  id="sales" name="salesAgent" value={leadData.salesAgent} className="form-control" onChange={handleChange}>
 <option  value="">Select a field</option>
 {sales?.sales?.map(agent=>(<option key={agent._id} value={agent._id}>{agent.name}</option>))}
 </select>
@@ -56,7 +56,7 @@ const LeadForm=({handleChange,handleSubmit,leadData,setLeadData,handleMultiDropD
 
 </>)}
 <br/><br/>
-<button className="link-display">Assign Lead</button>
+<button className="link-display" type="submit">Assign Lead</button>
 </form>
     </>)
 }
