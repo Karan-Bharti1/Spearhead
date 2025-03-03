@@ -27,19 +27,57 @@ const sales = useSelector(state => state.sales);
         dispatch(fetchLeads())
         dispatch(fetchSales())
         dispatch(fetchTags())
-    },[dispatch,id])
-console.log(leads.leads)
+    },[id])
+
+    // useEffect(() => {
+    //     if (!leads.leads?.length || !tags.tags.length) return; 
+    //     const data = leads.leads.find(lead => lead._id === id);
+    //     if (!data) return;
+    //     const salesAgentId = data.salesAgent ? data.salesAgent._id : "";
+    //     const requiredSales = {...data,salesAgent:salesAgentId,tags: data.tags.map(tag => ({ value: tag._id, label: tag.name }))}
+    //   console.log(requiredSales)
+    //     setLeadData(requiredSales);
+    // }, [leads.leads, id, sales.sales]);
+   
+
     useEffect(() => {
         if (!leads.leads?.length) return; 
+        
         const data = leads.leads.find(lead => lead._id === id);
         if (!data) return;
         
-        const requiredSales = sales?.sales?.find(sale => sale._id === data.salesAgent?._id);
-        const newData = { ...data, salesAgent: requiredSales?._id || "" };
-        const requiredData = { ...newData, tags: newData.tags.map(tag => ({ value: tag._id, label: tag.name })) };
-        setLeadData(requiredData);
-    }, [leads.leads, id, sales.sales]);
-    
+        // Add more logging to understand the data structure
+        console.log("Found lead data:", JSON.stringify(data));
+        
+        // Check the structure of salesAgent in the data
+        const salesAgentId = data.salesAgent?._id 
+            ? data.salesAgent._id 
+            : (typeof data.salesAgent === 'string' ? data.salesAgent : '');
+            
+        // Check the structure of tags in the data
+        const tagsList = Array.isArray(data.tags)
+            ? data.tags.map(tag => {
+                // Handle both object tags and string tags
+                if (typeof tag === 'object' && tag?._id && tag?.name) {
+                    return { value: tag._id, label: tag.name };
+                } else if (typeof tag === 'string') {
+                    // If tag is just an ID, look up the name from tags.tags
+                    const tagObj = tags.tags.find(t => t._id === tag);
+                    return tagObj ? { value: tagObj._id, label: tagObj.name } : { value: tag, label: "Unknown" };
+                }
+                return null;
+            }).filter(Boolean) 
+            : [];
+        
+        const requiredSales = {
+            ...data,
+            salesAgent: salesAgentId,
+            tags: tagsList
+        };
+        
+        console.log("Setting leadData:", JSON.stringify(requiredSales));
+        setLeadData(requiredSales);
+    }, [leads.leads, id, tags.tags]);  // Make sure to include tags.tags as a dependency
     const handleChange = (event) => {
         const { name, value } = event.target;
         setLeadData((prev) => ({
@@ -53,12 +91,34 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
     }
    
     const options=tags?.tags?.map(tag=>({value:tag._id,label:tag.name}))
-    const handleSubmit=(event)=>{
-        event.preventDefault()
-        const dataToBeSubmitted={...leadData,tags:leadData.tags.map(tag=>tag.value)}
-       dispatch(editLeadData({id,data:dataToBeSubmitted}))
+    // const handleSubmit=(event)=>{
+    //     event.preventDefault()
+       
+    //     const dataToBeSubmitted={...leadData,tags:leadData.tags.map(tag=>tag.value)}
+    //  setLeadData(dataToBeSubmitted)
+    //    dispatch(editLeadData({id,data:dataToBeSubmitted}))
 
+    // }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        // Ensure tags is an array of tag IDs
+        const processedTags = Array.isArray(leadData.tags) 
+            ? leadData.tags.map(tag => typeof tag === 'object' ? tag.value : tag)
+            : [];
+            
+        const dataToBeSubmitted = {
+            ...leadData,
+            tags: processedTags
+        };
+        
+        console.log("Submitting data:", JSON.stringify(dataToBeSubmitted));
+        dispatch(editLeadData({id, data: dataToBeSubmitted}));
+        
+        // Don't modify leadData state here, let the useEffect handle it
+        // after the Redux store updates
     }
+    
     return(<>
     <Header text={"Edit Lead"}/>
     <main className="container">

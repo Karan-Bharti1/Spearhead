@@ -39,7 +39,7 @@ console.log(leadData.closedAt)
     const handleMultiDropDown=(selectedOptions)=>{
 setLeadData(prev=>({...prev,tags:selectedOptions}))
     }
-    console.log(leadData)
+   
     const options=tags?.tags?.map(tag=>({value:tag._id,label:tag.name}))
    const handleSubmit=(event)=>{
 event.preventDefault()
@@ -48,6 +48,7 @@ const leadDataToSubmit = {
     ...leadData,
     tags: leadData.tags.map(tag => tag.value), // Extract only tag IDs
 };
+
 dispatch(addLead(leadDataToSubmit))
 if( leads.status==="succeeded")  {setMessage("Lead Assigned to the sales agent successfully")
 setTimeout(() => {

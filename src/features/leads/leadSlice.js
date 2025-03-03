@@ -20,6 +20,7 @@ export const editLeadData=createAsyncThunk("editLeads/Leads",async({id,data})=>{
             'Content-Type':'application/json'
         }
     })
+    console.log(response)
     return response.data
 })
  export const leadSlice=createSlice({
@@ -59,10 +60,11 @@ builder.addCase(editLeadData.pending,state=>{
 builder.addCase(editLeadData.fulfilled,(state,action)=>{
     state.status="succeeded"
     const index=state.leads.findIndex(lead=>lead._id===action.payload._id)
-    if(index!==-1){
+    console.log("Before Update:", state.leads[index]);
+    if(index!=-1){
 state.leads[index]=action.payload
-    }
-    
+    }   
+    console.log("After Update:", state.leads[index]);
 })
 builder.addCase(editLeadData.rejected,(state,action)=>{
     state.status="error"
