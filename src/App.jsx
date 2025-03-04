@@ -15,7 +15,7 @@ function App() {
 <div className='page-display'>
   <div className='sidebar'>
     <h2 className='sidebar-text'>Sidebar</h2>
-<Link className='btn-primary'>Leads</Link>
+<Link className='btn-primary' to={"/leadlist"}>Leads</Link>
 <Link className='btn-primary'>Sales</Link>
 <Link className='btn-primary'>Agents</Link>
 <Link className='btn-primary'>Reports</Link>

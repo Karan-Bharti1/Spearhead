@@ -8,6 +8,7 @@ import store from './store.js'
 import ViewDetail from './pages/ViewDetail.jsx'
 import AddNewLead from './pages/AddNewLead.jsx'
 import EditLead from './pages/EditLead.jsx'
+import LeadList from './pages/LeadList.jsx'
 const router=createBrowserRouter([{
 
   path:"/",
@@ -21,6 +22,9 @@ const router=createBrowserRouter([{
 },{
   path:"/editlead/:id",
   element:<EditLead/>
+},{
+  path:"leadlist",
+  element:<LeadList/>
 }])
 createRoot(document.getElementById('root')).render(
   <StrictMode>

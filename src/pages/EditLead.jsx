@@ -29,15 +29,7 @@ const sales = useSelector(state => state.sales);
         dispatch(fetchTags())
     },[id])
 
-    // useEffect(() => {
-    //     if (!leads.leads?.length || !tags.tags.length) return; 
-    //     const data = leads.leads.find(lead => lead._id === id);
-    //     if (!data) return;
-    //     const salesAgentId = data.salesAgent ? data.salesAgent._id : "";
-    //     const requiredSales = {...data,salesAgent:salesAgentId,tags: data.tags.map(tag => ({ value: tag._id, label: tag.name }))}
-    //   console.log(requiredSales)
-    //     setLeadData(requiredSales);
-    // }, [leads.leads, id, sales.sales]);
+ 
    
 
     useEffect(() => {
@@ -91,14 +83,7 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
     }
    
     const options=tags?.tags?.map(tag=>({value:tag._id,label:tag.name}))
-    // const handleSubmit=(event)=>{
-    //     event.preventDefault()
-       
-    //     const dataToBeSubmitted={...leadData,tags:leadData.tags.map(tag=>tag.value)}
-    //  setLeadData(dataToBeSubmitted)
-    //    dispatch(editLeadData({id,data:dataToBeSubmitted}))
 
-    // }
     const handleSubmit = (event) => {
         event.preventDefault();
         
@@ -115,8 +100,7 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
         console.log("Submitting data:", JSON.stringify(dataToBeSubmitted));
         dispatch(editLeadData({id, data: dataToBeSubmitted}));
         
-        // Don't modify leadData state here, let the useEffect handle it
-        // after the Redux store updates
+        
     }
     
     return(<>
