@@ -135,7 +135,7 @@ background-color: var(--text-color-);
   color:var(--card-text-);
 }
 .link-display{
-  padding: 0.5rem 0.3rem;
+  padding: 0.3rem ;
 text-decoration: none;
 background-color: var(--primary-color);
 color: var(--text-color-);
@@ -208,14 +208,18 @@ padding: 4px 0px;}
 .leadList{
   display: flex;
   justify-content: space-between;
-  border: 1px solid var(--primary-color);
- margin-top: 0.5rem;
+box-shadow: 1px 1px 1px 1px var(--form-border-);
+ margin-top: 1rem;
  padding: 1rem;
 }
 .filterLeadsLists{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.filterLeadsLists select{
+  border: 1px solid var(--primary-color);
 }
 @media (max-width:768px) {
 .heading{
@@ -292,5 +296,12 @@ flex-direction: column;
 .form{margin: 0rem;}
 .comment-container textarea{
   padding: 0rem;
+}
+.filterLeadsLists{
+  flex-direction: column;
+  gap:1rem;
+}
+.link-display{
+  padding: 0.3rem;
 }
 }
