@@ -53,10 +53,10 @@ return(<>
         </div>
         <div className="content">
          <form onSubmit={handleSubmit}>
-                <label htmlFor="name" className="text-head">Agent Name:</label>
+                <label htmlFor="name" className="text-head"><strong>Agent Name:</strong></label>
                 <input type="text" id="name" className="form-control" name="name" value={agent.name} onChange={handleChange} required/>
                 <br/><br/>
-                <label htmlFor="email" className="text-head">Email Id: </label>
+                <label htmlFor="email" className="text-head"><strong>Email Id:</strong> </label>
                 <input type="email" className="form-control"  id="eamil" name="email" value={agent.email} onChange={handleChange} required/>
                 <br/>
                 {sales.sales?.some(saleAgent=>saleAgent.email===agent.email) && (<p className="errorDisplay">This email Id Already Exists</p>)}

@@ -21,13 +21,15 @@ const SalesAgent=()=>
         </div>
        
         <div className="content">
-            <div className="addAgentContainer">
+            {salesAgents.status==="loading"&&(<>
+                <h2 className="load">Loading...</h2></>)}
+        {salesAgents.status!=="loading" &&<><div className="addAgentContainer">
                 <Link className="link-display" to={"/addagent"}>Add New Agent</Link>
             </div>
         <ul>
         {salesAgents?.sales?.map(agent=>(<li key={agent._id} className="leadList"><span >{agent.name}</span>
 <span className="comment-text">{agent.email}</span></li>))}
-</ul>
+</ul></>}
         </div>
         </div>
     </main>
