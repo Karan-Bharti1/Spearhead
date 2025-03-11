@@ -6,6 +6,7 @@
   --disabled-text-:#52525b;
   --profile-color-:#1e40af;
   --form-border-:hsl(0, 0%, 80%);
+  --error-display:red;
 }
 .header{
   justify-content: space-evenly;
@@ -224,6 +225,9 @@ justify-content: end;
 }
 .filterLeadsLists select{
   border: 1px solid var(--primary-color);
+}
+.errorDisplay{
+  color:var(--error-display) ;
 }
 @media (max-width:768px) {
 .heading{

@@ -1,0 +1,71 @@
+import { useEffect, useState } from "react"
+import Header from "../components/Header"
+import { Link } from "react-router-dom"
+import { addNewAgent, fetchSales } from "../features/salesAgents/SalesSlice"
+import { useDispatch, useSelector } from "react-redux"
+const AddNewAgent=()=>{
+    const [agent,setAgent]=useState({
+        name:"",
+        email:""
+    })
+    const [message,setMessage]=useState("")
+    const sales=useSelector(state=>state.sales)
+    console.log(sales)
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        dispatch(fetchSales())
+    },[dispatch])
+    const handleChange=event=>{
+        const {name,value}=event.target
+        setAgent(prev=>({...prev,[name]:value}))
+    }
+    const handleSubmit=event=>{
+        event.preventDefault()
+    
+       if( !sales.sales?.some(saleAgent=>saleAgent.email==agent.email)){
+        dispatch(addNewAgent(agent))
+        .then((result) => {
+         
+            setAgent({
+                name: "",
+                email: ""
+            })
+            setMessage("Data Added Successfully")
+            setTimeout(() => {
+                setMessage("")
+            }, 1500)
+        })
+        .catch((error) => {
+            setMessage("Failed to add agent")
+            setTimeout(() => {
+                setMessage("")
+            }, 1500)
+        })
+       }
+    }
+return(<>
+<Header text={"Add New Sales Agent"}/>
+<main className="container">
+    <div className="page-display">
+    <div className="sidebar">
+            <h2  className='sidebar-text'>Back to Dashboard</h2>
+        <Link className='btn-primary' to="/">Dashboard</Link>
+        </div>
+        <div className="content">
+         <form onSubmit={handleSubmit}>
+                <label htmlFor="name" className="text-head">Agent Name:</label>
+                <input type="text" id="name" className="form-control" name="name" value={agent.name} onChange={handleChange} required/>
+                <br/><br/>
+                <label htmlFor="email" className="text-head">Email Id: </label>
+                <input type="email" className="form-control"  id="eamil" name="email" value={agent.email} onChange={handleChange} required/>
+                <br/>
+                {sales.sales?.some(saleAgent=>saleAgent.email===agent.email) && (<p className="errorDisplay">This email Id Already Exists</p>)}
+                <br/>
+              
+                <button className="link-display" type="submit">Submit</button>
+            </form>
+            <h2>{message}</h2>
+        </div>
+        </div></main></>)
+}
+export default AddNewAgent

@@ -22,7 +22,7 @@ const SalesAgent=()=>
        
         <div className="content">
             <div className="addAgentContainer">
-                <Link className="link-display">Add New Agent</Link>
+                <Link className="link-display" to={"/addagent"}>Add New Agent</Link>
             </div>
         <ul>
         {salesAgents?.sales?.map(agent=>(<li key={agent._id} className="leadList"><span >{agent.name}</span>
