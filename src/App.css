@@ -218,6 +218,10 @@ box-shadow: 1px 1px 1px 1px var(--form-border-);
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+.addAgentContainer{
+display: flex;
+justify-content: end;
+}
 .filterLeadsLists select{
   border: 1px solid var(--primary-color);
 }
