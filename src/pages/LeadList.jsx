@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLeads } from "../features/leads/leadSlice";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import { fetchTags } from "../features/tags/tagsSlice";
+
 import { fetchSales } from "../features/salesAgents/SalesSlice";
 const LeadList=()=>{
     const [filter,setFilter]=useState("")
@@ -12,7 +12,7 @@ const LeadList=()=>{
     const sales=useSelector(state=>state.sales)
     const [prioritySort, setPrioritySort] = useState("")
     const [timeSort, setTimeSort] = useState("")
-    console.log(sales)
+    
     const [salesPerson,setSalesPerson]=useState("")
     useEffect(()=>{
         dispatch(fetchLeads())
@@ -31,14 +31,15 @@ return matchesFilter && matchesSales
             default: return 0
         }
     }
+    const dataToBeSorted=[...filteredLeads]
     if(timeSort==="highToLowTime"){
        
-        filteredLeads.sort((a, b) => b.timeToClose - a.timeToClose)
+        dataToBeSorted.sort((a, b) => b.timeToClose - a.timeToClose)
 
     }
     if(timeSort==="lowToHighTime"){
         
-        filteredLeads.sort((a, b) => a.timeToClose - b.timeToClose)
+      dataToBeSorted.sort((a, b) => a.timeToClose - b.timeToClose)
 
     }
     
@@ -46,11 +47,11 @@ return matchesFilter && matchesSales
 
  if(prioritySort==="highToLowPriority"){
     
-    filteredLeads.sort((a,b)=>getPriorityValue(b.priority)-getPriorityValue(a.priority))
+    dataToBeSorted.sort((a,b)=>getPriorityValue(b.priority)-getPriorityValue(a.priority))
  }
 if(prioritySort==="lowToHighPriority"){
     
-  filteredLeads.sort((a,b)=>getPriorityValue(a.priority)-getPriorityValue(b.priority))  
+  dataToBeSorted.sort((a,b)=>getPriorityValue(a.priority)-getPriorityValue(b.priority))  
  }
 return(<>
 <Header text={"Lead Lists"}/>
@@ -107,7 +108,7 @@ return(<>
 
               </div>
             
-{filteredLeads?.map(lead=>(<li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
+{dataToBeSorted?.map(lead=>(<li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
 <span className="comment-text">~{lead.salesAgent.name}</span></li>))}
 </ul>
         
