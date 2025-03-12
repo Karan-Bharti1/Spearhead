@@ -25,13 +25,13 @@ setLeadData(required)
     useEffect(()=>{
 setCommentsData(comments.comments)
     },[comments.comments])
-   const  handleSubmit=(event)=>{
-    event.preventDefault()
-dispatch(addComment({id,data:{commentText:commentText}}))
-if(comments.status==="succeeded"){
-    setCommentText("")
-}
-   }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(addComment({id, data: {commentText: commentText}}))
+            .then(() => {
+                setCommentText("");
+            });
+    }
     return(<>
     <Header text={"Lead Details"}/>
    

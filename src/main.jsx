@@ -11,6 +11,7 @@ import EditLead from './pages/EditLead.jsx'
 import LeadList from './pages/LeadList.jsx'
 import SalesAgent from './pages/SalesAgentsList.jsx'
 import AddNewAgent from './pages/AddNewAgent.jsx'
+import StatusView from './pages/StatusView.jsx'
 const router=createBrowserRouter([{
 
   path:"/",
@@ -32,7 +33,10 @@ const router=createBrowserRouter([{
   element:<SalesAgent/>
 },{
   path:"/addagent",
-  element:<AddNewAgent/>
+  element:<AddNewAgent/>}
+,{
+  path:'/statusview',
+  element:<StatusView/>
 }])
 createRoot(document.getElementById('root')).render(
   <StrictMode>

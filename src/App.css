@@ -51,6 +51,7 @@ margin: 2rem;
   padding-bottom: 2rem;
 }
 .btn-primary{
+  box-sizing: border-box;
   text-decoration: none;
   border: 1.5px solid var(--primary-color);
   margin-top: 1rem;
