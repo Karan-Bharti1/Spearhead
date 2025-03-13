@@ -248,7 +248,10 @@ justify-content: end;
 display: flex;
 flex-direction: column;
 }
-
+.filteredLeadsByStatus{
+  display: flex;
+  flex-direction: column;
+}
 .sidebar{
   display: flex;
   flex-direction: row;

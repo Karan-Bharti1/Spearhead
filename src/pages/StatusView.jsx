@@ -22,6 +22,9 @@ const StatusView=()=>{
                 key: "status",
                 value: status
             }));
+            setSalesPerson("")
+            setSelectedPriority("")
+            setTimeSort("")
         }
     };
     useEffect(()=>{
@@ -116,7 +119,7 @@ if(timeSort==="lowToHighTime"){
                                 ) }
                                 {leads.status!=="loading"&& currentStatus &&  data.length == 0 && <p className="sec-heading">No Leads Found</p>}
                                 <br></br>
-                             {   !currentStatus && <p className="sec-heading">You need to select any status value to view leads data for that status.</p>}
+                             {  !currentStatus && <p className="sec-heading">You need to select any status value to view leads data for that status.</p>}
             </div>
             </div>
             </div>
