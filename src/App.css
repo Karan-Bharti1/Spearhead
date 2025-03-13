@@ -261,6 +261,7 @@ flex-direction: column;
 .btn-primary{
   padding: 0.4rem;
   flex-grow: 1;
+  margin-left:  2rem;
 }
 .status-container{
   display: flex;

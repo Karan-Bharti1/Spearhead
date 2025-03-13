@@ -5,15 +5,7 @@ export const fetchSales=createAsyncThunk("fetchSales/sales",async()=>{
     const response=await axios.get(salesUrl)
     return response.data
 })
-// export const addNewAgent=createAsyncThunk("addNewAgent/sales",async(agent)=>{
-//     const response=await axios.post(salesUrl,agent,{
-// headers:{
-//     'Content-Type':'application/json'
-// }
-//     })
-    
-//     return response.data
-// })
+
 export const addNewAgent = createAsyncThunk("addNewAgent/sales", async(agent) => {
     try {
         // Direct string URL, properly formatted request

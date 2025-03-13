@@ -5,6 +5,12 @@ export const fetchLeads=createAsyncThunk("fetchLeads/Leads",async()=>{
     const response=await axios.get(leadURL)
     return response.data
 })
+export const fetchQueryStringBasedLeadsData=createAsyncThunk("fetchQueryStringBasedLeads/Leads",async({key,value})=>{
+    const response=await axios.get(`${leadURL}?${key}=${value}`)
+
+    return response.data
+
+})
 export const addLead=createAsyncThunk("addLeads/leads",async(data)=>{
     const response=await axios.post(leadURL,data,{
         method:'POST',
@@ -20,7 +26,7 @@ export const editLeadData=createAsyncThunk("editLeads/Leads",async({id,data})=>{
             'Content-Type':'application/json'
         }
     })
-    console.log(response)
+   
     return response.data
 })
  export const leadSlice=createSlice({
@@ -67,6 +73,19 @@ state.leads[index]=action.payload
     console.log("After Update:", state.leads[index]);
 })
 builder.addCase(editLeadData.rejected,(state,action)=>{
+    state.status="error"
+    state.error=action.payload
+})
+
+builder.addCase(fetchQueryStringBasedLeadsData.pending,state=>{
+    state.status="loading"
+})
+builder.addCase(fetchQueryStringBasedLeadsData.fulfilled,(state,action)=>{
+    state.status="succeeded"
+    console.log(action.payload)
+    state.leads=action.payload
+})
+builder.addCase(fetchQueryStringBasedLeadsData.rejected,(state,action)=>{
     state.status="error"
     state.error=action.payload
 })
