@@ -230,6 +230,10 @@ justify-content: end;
 .errorDisplay{
   color:var(--error-display) ;
 }
+.filteredLeadsByStatus{
+  display: flex;
+  justify-content: space-between;
+}
 @media (max-width:768px) {
 .heading{
   font-size: larger;
