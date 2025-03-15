@@ -234,6 +234,14 @@ justify-content: end;
   display: flex;
   justify-content: space-between;
 }
+.chart-container{
+  display: flex;
+ justify-content: space-around;
+
+}
+.ter-heading{
+  font-size: larger;
+}
 @media (max-width:768px) {
 .heading{
   font-size: larger;

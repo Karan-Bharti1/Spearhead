@@ -17,8 +17,9 @@ function App() {
     <h2 className='sidebar-text'>Sidebar</h2>
 <Link className='btn-primary' to={"/leadlist"}>Leads</Link>
 <Link className='btn-primary' to={"/salesagents"}>Agents</Link>
+
+<Link className='btn-primary' to={"/reports"}>Reports</Link>
 <Link className='btn-primary' to={"/statusview"}>Status</Link>
-<Link className='btn-primary'>Reports</Link>
 <Link className='btn-primary' to={'/salesagentview'}>Agent'sView</Link>
   </div>
   <div className='content'>
