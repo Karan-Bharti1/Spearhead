@@ -65,13 +65,11 @@ return(<>
         {(leads.status==="loading" || sales.status==="loading" )&&(<>
         <h2 className="load">Loading...</h2></>)}
         {leads.status=="error" && <h2 className="sec-heading">Failed to fetch leads data</h2>}
-        {leads.status!=="loading" && sales.status!=="loading"&& leads.status=="error" ||sales.status=="error"  && (
+        {leads.status!=="loading" && sales.status!=="loading"&& leads.status!="error" &&sales.status!="error"  && (
        
             <ul>
               <div className="filterLeadsLists">
-               
-          
-              <div>
+             <div>
               <label ><strong>Filter By : </strong> </label>
 <select id="filter" onChange={event=>setFilter(event.target.value)}>
     <option value="">Select Status</option>

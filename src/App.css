@@ -256,6 +256,7 @@ justify-content: end;
 .page-display{
 display: flex;
 flex-direction: column;
+
 }
 .filteredLeadsByStatus{
   display: flex;
@@ -265,11 +266,12 @@ flex-direction: column;
   display: flex;
   flex-direction: row;
   border: none;
-margin-left: 2rem;
-margin-right: 2rem;
+margin-left: 1rem;
+margin-right: 1rem;
   justify-content:center;
 flex-wrap: wrap;
-  
+  align-self: center;
+  padding: 0rem;;
 }
 .sidebar-text{
   display: none;  
@@ -337,5 +339,14 @@ flex-wrap: wrap;
 .chart-container{
   display: flex;
   flex-direction: column;
+}
+.lead-content{
+  padding-left: 0rem;
+}
+.sales-content{
+  box-shadow:1px 1px  1px 1px var(--form-border-);
+  padding: 1rem;
+ margin-right: 0rem;
+ 
 }
 }
