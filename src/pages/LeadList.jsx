@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLeads } from "../features/leads/leadSlice";
+import { fetchLeads, fetchQueryStringBasedLeadsData } from "../features/leads/leadSlice";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
@@ -12,17 +12,17 @@ const LeadList=()=>{
     const sales=useSelector(state=>state.sales)
     const [prioritySort, setPrioritySort] = useState("")
     const [timeSort, setTimeSort] = useState("")
-    
+    const [source,setSource]=useState("")
     const [salesPerson,setSalesPerson]=useState("")
     useEffect(()=>{
-        dispatch(fetchLeads())
+        dispatch(fetchQueryStringBasedLeadsData({
+            key:"status",
+            value:filter,
+            key1:"salesAgent",
+            value1:salesPerson
+        }))
         dispatch(fetchSales())
     },[dispatch])
-    const filteredLeads=leads.leads?.filter(lead=>{
-const matchesFilter=filter===""||filter==="All"||lead.status===filter
-const matchesSales=salesPerson===""||lead.salesAgent._id===salesPerson||salesPerson==="All"
-return matchesFilter && matchesSales
-    })
     const getPriorityValue=(priority)=>{
         switch (priority.toLowerCase()){
             case 'high' : return 3
@@ -31,7 +31,37 @@ return matchesFilter && matchesSales
             default: return 0
         }
     }
-    const dataToBeSorted=[...filteredLeads]
+    const handleSalesChange=(event)=>{
+        const newSalesPerson = event.target.value;
+  setSalesPerson(newSalesPerson);
+      dispatch(fetchQueryStringBasedLeadsData ( {key:"status",
+        value:filter,
+        key1:"salesAgent",
+        value1:newSalesPerson,
+        key2:"source",
+        value2:source})  )
+    }
+    const handleStatusChange=(event)=>{
+        const newFilter=event.target.value
+        setFilter(newFilter)
+      dispatch(fetchQueryStringBasedLeadsData ( {key:"status",
+        value:newFilter,
+        key1:"salesAgent",
+        value1:salesPerson,
+        key2:"source",
+        value2:source})  )
+    }
+    const handleSourceChange=(event)=>{
+        const newSource=event.target.value
+        setSource(newSource)
+      dispatch(fetchQueryStringBasedLeadsData ( {key:"status",
+        value:filter,
+        key1:"salesAgent",
+        value1:salesPerson,
+        key2:"source",
+    value2:newSource,})  )
+    }
+    const dataToBeSorted=[...leads.leads]
     if(timeSort==="highToLowTime"){
        
         dataToBeSorted.sort((a, b) => b.timeToClose - a.timeToClose)
@@ -42,9 +72,7 @@ return matchesFilter && matchesSales
       dataToBeSorted.sort((a, b) => a.timeToClose - b.timeToClose)
 
     }
-    
-       
-
+   
  if(prioritySort==="highToLowPriority"){
     
     dataToBeSorted.sort((a,b)=>getPriorityValue(b.priority)-getPriorityValue(a.priority))
@@ -71,21 +99,31 @@ return(<>
               <div className="filterLeadsLists">
              <div>
               <label ><strong>Filter By : </strong> </label>
-<select id="filter" onChange={event=>setFilter(event.target.value)}>
+<select id="filter" value={filter} onChange={handleStatusChange}>
     <option value="">Select Status</option>
-    <option value="All">All</option>
     <option value="New">New</option>
     <option value="Contacted">Contacted</option>
     <option value="Qualified">Qualified</option>
     <option value="Closed">Closed</option>
+    <option value="Proposal Sent">Proposal Sent</option>
 </select>
 
 {" "}
-<select id="filterSales" onChange={event=>setSalesPerson(event.target.value)}>
+<select id="filterSales" value={salesPerson} onChange={handleSalesChange}>
 <option value="">Select Sales Agent</option>
-<option value="All">All</option>
+
 {sales?.sales?.map(sale=>(<option key={sale._id} value={sale._id}>{sale.name}</option>))}
 
+</select>
+{" "}
+<select id="filter" value={source} onChange={handleSourceChange}>
+    <option value="">Select Source</option>
+    <option value="Website">Website</option>
+    <option value="Referral">Referral</option>
+    <option value="Cold Call">Cold Call</option>
+    <option value="Advertisement">Advertisement</option>
+    <option value="Email">Email</option>
+    <option value="Other">Other</option>
 </select>
 </div>
 <div><label className=""><strong>Sort By: </strong></label>
@@ -103,7 +141,8 @@ return(<>
 <div>
 <Link className="link-display" to="/addnewlead"> New Lead</Link>
 </div>
-          </div>       
+          </div> 
+          {dataToBeSorted.length===0 &&(<><br/><br/> <p className="main-heading">No Leads Found</p></>)}      
 {dataToBeSorted?.map(lead=>(<li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
 <span className="comment-text">~{lead.salesAgent.name}</span></li>))}
 </ul>

@@ -18,11 +18,12 @@ const StatusView = () => {
     const handleChange = (e) => {
         const status = e.target.value;
         setCurrentStatus(status);
-        
+       
         if (status) {
             dispatch(fetchQueryStringBasedLeadsData({
                 key: "status",
-                value: status
+                value: status,
+               
             }));
             setSalesPerson("");
             setSelectedPriority("");

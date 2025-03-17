@@ -5,8 +5,8 @@ export const fetchLeads=createAsyncThunk("fetchLeads/Leads",async()=>{
     const response=await axios.get(leadURL)
     return response.data
 })
-export const fetchQueryStringBasedLeadsData=createAsyncThunk("fetchQueryStringBasedLeads/Leads",async({key,value})=>{
-    const response=await axios.get(`${leadURL}?${key}=${value}`)
+export const fetchQueryStringBasedLeadsData=createAsyncThunk("fetchQueryStringBasedLeads/Leads",async({key,value,key1,value1,key2,value2})=>{
+    const response=await axios.get(`${leadURL}?${key}=${value}&${key1}=${value1}&${key2}=${value2}`)
 
     return response.data
 
