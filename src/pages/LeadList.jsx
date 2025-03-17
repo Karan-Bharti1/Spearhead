@@ -103,10 +103,7 @@ return(<>
 <div>
 <Link className="link-display" to="/addnewlead"> New Lead</Link>
 </div>
-
-
-              </div>
-            
+          </div>       
 {dataToBeSorted?.map(lead=>(<li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
 <span className="comment-text">~{lead.salesAgent.name}</span></li>))}
 </ul>

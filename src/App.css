@@ -100,7 +100,6 @@ background-color: var(--text-color-);
  font-size: x-large;
 }
 .lead-status{
-
   margin-left: 2rem;
   margin-right: 2rem;
   padding:0rem;
@@ -331,6 +330,7 @@ flex-wrap: wrap;
 }
 .filterLeadsLists{
   flex-direction: column;
+  
   gap:1rem;
 }
 .link-display{
@@ -348,5 +348,23 @@ flex-wrap: wrap;
   padding: 1rem;
  margin-right: 0rem;
  
+}
+.addAgentContainer{
+  margin-top: 1rem;
+}
+.lead-list-container {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+
+ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.leadList {
+  padding: 0.5rem;
+  margin-left: 0;
 }
 }
