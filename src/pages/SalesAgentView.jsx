@@ -99,7 +99,7 @@ setTimeSort("")
 <div className="filteredLeadsByStatus">
     <div >
     <label><strong>Filter By: </strong></label>{" "}
-    <select onChange={handleStatus}>
+    <select onChange={handleStatus} value={selectStatus}>
                 <option value="">Select a status</option>
                 <option value="New">New</option>
 <option value="Contacted">Contacted</option>
@@ -108,7 +108,7 @@ setTimeSort("")
 <option value="Closed">Closed</option>
             </select>
             {" "}
-            <select onChange={handlePriority}>
+            <select onChange={handlePriority} value={selectPriority}>
 
     <option value="">Select Priority</option>
     <option value="High">High</option>
@@ -119,7 +119,7 @@ setTimeSort("")
             </div>
             <div>
                 <labe><strong>Sort By: </strong></labe>
-            <select onChange={event=>setTimeSort(event.target.value)}>
+            <select onChange={event=>setTimeSort(event.target.value)} value={timeSort}>
     <option value="">Sort by Time To Close</option>
     <option value="highToLowTime">High to Low Close Time</option>
     <option value="lowToHighTime">Low to High Close Time</option>
