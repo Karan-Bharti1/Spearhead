@@ -37,14 +37,12 @@ const StatusView = () => {
         setData(leads.leads);
     }, [leads]);
     
-    const filteredData = data?.filter(lead => {
-        const matchesSales = salesPerson === "" || lead.salesAgent._id === salesPerson || salesPerson === "All";
-        const matchesPriority = selectedPriority === "" || selectedPriority === "All" || lead.priority === selectedPriority;
-        return matchesSales && matchesPriority;
-    });
+    const filteredData = [...data]
     const handleSalesPerson=event=>{
         const newSalesPerson=event.target.value
         setSalesPerson(newSalesPerson)
+        setTimeSort("")
+        
         dispatch(fetchQueryStringBasedLeadsData({
             key:"status",
             value:currentStatus,
@@ -57,6 +55,8 @@ const StatusView = () => {
     const handlePriority=event=>{
         const newPriority=event.target.value
         setSelectedPriority(newPriority)
+        setTimeSort("")
+      
         dispatch(fetchQueryStringBasedLeadsData({
             key:"status",
             value:currentStatus,
@@ -66,6 +66,7 @@ const StatusView = () => {
             value2:newPriority
         }))
     }
+    
     if (timeSort === "highToLowTime") {
         filteredData.sort((a, b) => b.timeToClose - a.timeToClose);
     }
@@ -123,7 +124,7 @@ const StatusView = () => {
                                         </div>
                                         <div>
                                             <label><strong>Sort By: </strong></label>
-                                            <select onChange={event => setTimeSort(event.target.value)}>
+                                            <select onChange={event => setTimeSort(event.target.value)} value={timeSort}>
                                                 <option value="">Sort by Time To Close</option>
                                                 <option value="highToLowTime">High to Low Close Time</option>
                                                 <option value="lowToHighTime">Low to High Close Time</option>

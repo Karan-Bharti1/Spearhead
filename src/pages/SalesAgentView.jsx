@@ -30,14 +30,37 @@ const SalesAgentView=()=>{
 setSelectPriority("")
 setSelectStatus("")}
 setTimeSort("")
-
         }
        
-    const filteredData=data?.filter(lead=>{
-        const matcheStatus=selectStatus===""||selectStatus==="All"||lead.status===selectStatus
-        const matchesPriority=selectPriority===""||selectPriority==="All"||lead.priority===selectPriority
-        return matcheStatus && matchesPriority
-    })    
+    const filteredData=[...data] 
+    const handleStatus=event=>{
+      const newStatus=event.target.value
+      setSelectStatus(newStatus)
+      setTimeSort("")
+    
+      dispatch(fetchQueryStringBasedLeadsData({
+        key:"salesAgent",
+        value:salesPerson,
+          key1:"status",
+          value1:newStatus,
+          key2:"priority",
+          value2:selectPriority
+      }))
+  }
+    const handlePriority=event=>{
+      const newPriority=event.target.value
+      setSelectPriority(newPriority)
+      setTimeSort("")
+    
+      dispatch(fetchQueryStringBasedLeadsData({
+        key:"salesAgent",
+        value:salesPerson,
+          key1:"status",
+          value1:selectStatus,
+          key2:"priority",
+          value2:newPriority
+      }))
+  }
     if(timeSort==="highToLowTime"){
        
         filteredData.sort((a, b) => b.timeToClose - a.timeToClose)
@@ -76,7 +99,7 @@ setTimeSort("")
 <div className="filteredLeadsByStatus">
     <div >
     <label><strong>Filter By: </strong></label>{" "}
-    <select onChange={event=>setSelectStatus(event.target.value)}>
+    <select onChange={handleStatus}>
                 <option value="">Select a status</option>
                 <option value="New">New</option>
 <option value="Contacted">Contacted</option>
@@ -85,10 +108,9 @@ setTimeSort("")
 <option value="Closed">Closed</option>
             </select>
             {" "}
-            <select onChange={event=>setSelectPriority(event.target.value)}>
+            <select onChange={handlePriority}>
 
     <option value="">Select Priority</option>
-    <option value="All">All</option>
     <option value="High">High</option>
     <option value="Medium">Medium</option>
     <option value="Low">Low</option>
