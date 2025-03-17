@@ -56,6 +56,7 @@ setCommentsData(comments.comments)
                 <p><strong><span className="text-head">Time To Close: </span></strong>{leadData?.timeToClose}</p>
                 <p><strong><span className="text-head">Priority: </span></strong>{leadData?.priority}</p>
                 {leadData?.status==="Closed"&&leadData?.closedAt &&  <p><strong><span className="text-head">Closed At: </span></strong>{leadData?.closedAt.split("T").map(data=>data).join(", ")}</p>}
+                <Link className="link-display" to={`/editlead/${id}`}>Edit Details</Link>
             </div>
             <div className="sales-content">
                <p className="sec-heading">Sales Agent</p>
@@ -64,7 +65,7 @@ setCommentsData(comments.comments)
             </div>
             </div>
             <div className="edit-container">
-                <Link className="link-display" to={`/editlead/${id}`}>Edit Details</Link>
+              
             </div>
             <div>
                 <p className="sec-heading">Comment Box</p>
@@ -86,7 +87,7 @@ setCommentsData(comments.comments)
                         </div>
                          <p ><span className="text-head"><strong>Remarks:</strong></span> {comment.commentText}</p>
                          </div>)
-                    )}
+                    ).reverse()}
                 </div>)}
               
                 {

@@ -151,7 +151,8 @@ border-radius: 3px;
 
 }
 .lead-content{
-  padding-left: 2rem;
+  padding: 2rem;
+  box-shadow:1px 1px  1px 1px var(--form-border-);
 }
 .content-container{
   display: flex;
@@ -242,6 +243,7 @@ justify-content: end;
 .ter-heading{
   font-size: larger;
 }
+
 @media (max-width:768px) {
 .heading{
   font-size: larger;
@@ -291,6 +293,7 @@ flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  gap: 2rem;
 }
 .lead-content{
   padding-left: 0rem;
