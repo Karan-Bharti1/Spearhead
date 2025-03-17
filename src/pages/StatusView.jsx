@@ -23,11 +23,9 @@ const StatusView = () => {
             dispatch(fetchQueryStringBasedLeadsData({
                 key: "status",
                 value: status,
-               
-            }));
-            setSalesPerson("");
+             })).then(result=>{setSalesPerson("");
             setSelectedPriority("");
-            setTimeSort("");
+            setTimeSort("")})
         }
     };
     
@@ -44,7 +42,30 @@ const StatusView = () => {
         const matchesPriority = selectedPriority === "" || selectedPriority === "All" || lead.priority === selectedPriority;
         return matchesSales && matchesPriority;
     });
-    
+    const handleSalesPerson=event=>{
+        const newSalesPerson=event.target.value
+        setSalesPerson(newSalesPerson)
+        dispatch(fetchQueryStringBasedLeadsData({
+            key:"status",
+            value:currentStatus,
+            key1:"salesAgent",
+            value1:newSalesPerson,
+            key2:"priority",
+            value2:selectedPriority
+        }))
+    }
+    const handlePriority=event=>{
+        const newPriority=event.target.value
+        setSelectedPriority(newPriority)
+        dispatch(fetchQueryStringBasedLeadsData({
+            key:"status",
+            value:currentStatus,
+            key1:"salesAgent",
+            value1:salesPerson,
+            key2:"priority",
+            value2:newPriority
+        }))
+    }
     if (timeSort === "highToLowTime") {
         filteredData.sort((a, b) => b.timeToClose - a.timeToClose);
     }
@@ -86,16 +107,15 @@ const StatusView = () => {
                                     <div className="filteredLeadsByStatus">
                                         <div>
                                             <label><strong>Filters: </strong></label>{" "}
-                                            <select onChange={event => setSalesPerson(event.target.value)}>
+                                            <select onChange={handleSalesPerson}>
                                                 <option value="">Select Sales Agent</option>
                                                 <option value="All">All</option>
                                                 {sales?.sales?.map(sale => (
                                                     <option key={sale._id} value={sale._id}>{sale.name}</option>
                                                 ))}
                                             </select>{" "}
-                                            <select onChange={event => setSelectedPriority(event.target.value)}>
+                                            <select onChange={handlePriority}>
                                                 <option value="">Select Priority</option>
-                                                <option value="All">All</option>
                                                 <option value="High">High</option>
                                                 <option value="Medium">Medium</option>
                                                 <option value="Low">Low</option>
