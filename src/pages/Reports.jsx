@@ -157,12 +157,16 @@ const pieChartDataStatus={
         <Link className='btn-primary' to="/">Dashboard</Link>
         </div>
         <div className="content" >
-            <h2 className="main-heading">Reports Overview</h2>
+          
             {(leads.status=="loading" ||sales.status=="loading" || leadsClosedLastWeek.status=="loading") && (<>
                 <h2 className="load">Loading...</h2>
                 </>)}
+                {(leads.status=="error" ||sales.status=="error" || leadsClosedLastWeek.status=="error") && (<>
+                <h2 className="load">Failed to fetch reports data</h2>
+                </>)}
         {
-            leads.status!=="loading" && sales.status!=="loading" && leadsClosedLastWeek.status!=="loading" && (<>
+            leads.status!=="loading" && sales.status!=="loading" && leadsClosedLastWeek.status!=="loading"&& leads.status!="error"&&sales.status!="error"  && (<>
+             <h2 className="main-heading">Reports Overview</h2>
              <h2 className="sec-heading">Total Leads closed and in Pipeline</h2>
             <div className="chart-container">
                 <div>

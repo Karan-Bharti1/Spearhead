@@ -64,7 +64,8 @@ return(<>
         <div className="content" >
         {(leads.status==="loading" || sales.status==="loading" )&&(<>
         <h2 className="load">Loading...</h2></>)}
-        {leads.status!=="loading" && sales.status!=="loading" && (
+        {leads.status=="error" && <h2 className="sec-heading">Failed to fetch leads data</h2>}
+        {leads.status!=="loading" && sales.status!=="loading"&& leads.status=="error" ||sales.status=="error"  && (
        
             <ul>
               <div className="filterLeadsLists">
@@ -102,7 +103,7 @@ return(<>
 </select>
 </div>
 <div>
-<Link className="link-display" to="/addnewlead">Add New Lead</Link>
+<Link className="link-display" to="/addnewlead"> New Lead</Link>
 </div>
 
 

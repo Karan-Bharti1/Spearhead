@@ -46,13 +46,14 @@ margin: 2rem;
 .sidebar{
   display: flex;
   flex-direction: column;
-  /* border-right: 1px solid var(--primary-color); */
+
   padding-right: 2rem;
   padding-bottom: 2rem;
 }
 .btn-primary{
   box-sizing: border-box;
   text-decoration: none;
+font-size: larger;
   border: 1.5px solid var(--primary-color);
   margin-top: 1rem;
   padding: 0.4rem 4rem;
@@ -264,19 +265,22 @@ flex-direction: column;
   display: flex;
   flex-direction: row;
   border: none;
-  gap: 6px;
-  justify-content: center;
-  padding-right: 0px;
+margin-left: 2rem;
+margin-right: 2rem;
+  justify-content:center;
+flex-wrap: wrap;
   
 }
 .sidebar-text{
-  display: none;
+  display: none;  
 }
 
 .btn-primary{
   padding: 0.4rem;
-  flex-grow: 1;
-  margin-left:  2rem;
+  margin-left:  0.5rem;
+  margin-right: 0.5rem;
+  font-size: medium;
+ 
 }
 .status-container{
   display: flex;
@@ -310,13 +314,14 @@ flex-direction: column;
 .content-container{
   display: flex;
   flex-direction:column;
- align-content:stretch;
+ align-items: center;
 }
-.sales-content{
+/* .sales-content{
   align-self: start;
-}
+} */
 .edit-container{
   padding-left: 0px;
+  align-self: center;
 }
 .form{margin: 0rem;}
 .comment-container textarea{
@@ -328,5 +333,9 @@ flex-direction: column;
 }
 .link-display{
   padding: 0.3rem;
+}
+.chart-container{
+  display: flex;
+  flex-direction: column;
 }
 }

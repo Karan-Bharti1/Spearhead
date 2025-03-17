@@ -56,8 +56,9 @@ setTimeSort("")
             <h2  className='sidebar-text'>Back to Dashboard</h2>
         <Link className='btn-primary' to="/">Dashboard</Link>
         </div>
-       
         <div className="content">
+       { sales.status === "error" && <h2 className="load">Failed To fetch sales agents Data</h2>}
+       {sales.status !== "error" && <div>
         <div>
             <h3>Select any Sales Agent:{" "}
 
@@ -69,8 +70,9 @@ setTimeSort("")
 </select>{" "}</h3>
 <hr/>
 </div>
-{leads.status==="loading" && <h2 className="load">Loading...</h2>}
-{data.length>0 && salesPerson && leads.status!=="loading" &&(<>
+{leads.status === "loading" && <h2 className="load">Loading...</h2>}
+{leads.status === "error" && <h2 className="load">Failed To Fetch Leads Data</h2>}
+{leads.status !== "loading" && leads.status !== "error" && sales.status !== "loading" && sales.status !== "error" && salesPerson &&(<>
 <div className="filteredLeadsByStatus">
     <div >
     <label><strong>Filter By: </strong></label>{" "}
@@ -103,22 +105,26 @@ setTimeSort("")
             </div>
             </div>
     <ul>
-                                        {filteredData.map(lead => (
-                                            <li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
-<span className="comment-text">~{lead.salesAgent.name}</span></li>
-                                           
-                                        ))}
-                                        {filteredData.length===0 && <p className="sec-heading">No Leads Found</p>}
-                                    </ul>
+    {filteredData && filteredData.length > 0 ? (
+        filteredData.map(lead => (
+          <li key={lead._id} className="leadList">
+            <span><Link to={`/viewdetails/${lead._id}`}>{lead.name} [{lead.status}]</Link></span>
+            <span className="comment-text">~{lead.salesAgent.name}</span>
+          </li>
+        ))
+      ) : (
+        <p className="sec-heading">No Leads Found</p>
+      )}
+ </ul>
 </>)}
-{salesPerson && data.length===0 && leads.status!=="loading" && (<p className="sec-heading">
-    No Leads Found
-</p>)}
-<h2 className="sec-heading"></h2>
+
+
 <br></br>
-{   !salesPerson && <p className="sec-heading">You need to select any sales agent to view leads data for that agent.</p>}
-            </div>
-            </div>
+{!salesPerson && leads.status!="error" && leads.status !== "loading" && (
+  <p className="sec-heading">You need to select any sales agent to view leads data for that agent.</p>
+)}
+            </div>}
+            </div></div>
     </main>
     </>)
 }

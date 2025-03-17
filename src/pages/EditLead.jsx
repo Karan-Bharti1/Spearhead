@@ -13,7 +13,7 @@ const EditLead=()=>{
     const leads = useSelector(state => state.leads);
 const tags = useSelector(state => state.tags);
 const sales = useSelector(state => state.sales);
-
+const [message,setMessage]=useState("")
     const dispatch=useDispatch()
     const [leadData,setLeadData]=useState({ name:"",
         source:"",
@@ -38,8 +38,6 @@ const sales = useSelector(state => state.sales);
         const data = leads.leads.find(lead => lead._id === id);
         if (!data) return;
         
-        // Add more logging to understand the data structure
-        console.log("Found lead data:", JSON.stringify(data));
         
         // Check the structure of salesAgent in the data
         const salesAgentId = data.salesAgent?._id 
@@ -60,16 +58,22 @@ const sales = useSelector(state => state.sales);
                 return null;
             }).filter(Boolean) 
             : [];
-        
+     
+        let formattedData = {...data};
+        if (formattedData.closedAt) {
+            // Format to YYYY-MM-DDThh:mm (local datetime-local input format)
+            const date = new Date(formattedData.closedAt);
+            formattedData.closedAt = date.toISOString().slice(0, 16);
+        }
         const requiredSales = {
-            ...data,
+            ...formattedData,
             salesAgent: salesAgentId,
             tags: tagsList
         };
         
         console.log("Setting leadData:", JSON.stringify(requiredSales));
         setLeadData(requiredSales);
-    }, [leads.leads, id, tags.tags]);  // Make sure to include tags.tags as a dependency
+    }, [leads.leads, id, tags.tags]);  
     const handleChange = (event) => {
         const { name, value } = event.target;
         setLeadData((prev) => ({
@@ -98,7 +102,22 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
         };
         
         console.log("Submitting data:", JSON.stringify(dataToBeSubmitted));
-        dispatch(editLeadData({id, data: dataToBeSubmitted}));
+        dispatch(editLeadData({id, data: dataToBeSubmitted})).then(result=>{
+            if(!result.error){
+                setMessage("Data Updated Successfully")
+            } else {
+                setMessage("Failed to update lead data")
+            }
+            setTimeout(() => {
+                setMessage("")    
+            }, 1500);
+        })
+        .catch((error) => {
+            setMessage("Failed to assign lead to the agent")
+            setTimeout(() => {
+                setMessage("")    
+            }, 1500);
+        })
         
         
     }
@@ -106,6 +125,8 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
     return(<>
     <Header text={"Edit Lead"}/>
     <main className="container">
+    {leads.status=="loading" && <p className="sec-heading">Loading...</p>}
+    {leads.status!="loading"&& leads.status=="error" && <p className="sec-heading">Failed to fetch leads data.</p>}
    {leads.status!="loading" && <div className="page-display">
         <div className="sidebar">
             <h2  className='sidebar-text'>Back to Dashboard</h2>
@@ -114,8 +135,11 @@ setLeadData(prev=>({...prev,tags:selectedOptions}))
         <div className="content">
             <LeadForm handleChange={handleChange} handleSubmit={handleSubmit} handleMultiDropDown={handleMultiDropDown} leadData={leadData}
             setLeadData={setLeadData} options={options} sales={sales}/>
+            <h2>{message}</h2>
         </div>
         </div>}
+        
+       
     </main>
     </>)
 }

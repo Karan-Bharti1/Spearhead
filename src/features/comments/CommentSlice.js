@@ -46,7 +46,7 @@ builder.addCase(addComment.fulfilled,(state,action)=>{
 })
 builder.addCase(addComment.rejected,(state,action)=>{
     state.status="error"
-    state.status=action.payload
+    
 })
     }
 })

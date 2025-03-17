@@ -19,30 +19,37 @@ const AddNewAgent=()=>{
         const {name,value}=event.target
         setAgent(prev=>({...prev,[name]:value}))
     }
-    const handleSubmit=event=>{
+    const handleSubmit = event => {
         event.preventDefault()
-    
-       if( !sales.sales?.some(saleAgent=>saleAgent.email==agent.email)){
-        dispatch(addNewAgent(agent))
-        .then((result) => {
-         
-            setAgent({
-                name: "",
-                email: ""
-            })
-            setMessage("Data Added Successfully")
-            setTimeout(() => {
-                setMessage("")
-            }, 1500)
-        })
-        .catch((error) => {
-            setMessage("Failed to add agent")
-            setTimeout(() => {
-                setMessage("")
-            }, 1500)
-        })
-       }
+        
+        if(!sales.sales?.some(saleAgent => saleAgent.email === agent.email)) {
+            dispatch(addNewAgent(agent))
+                .then((result) => {
+                    // Check if the action was fulfilled (not rejected)
+                    if(!result.error) {
+                        setAgent({
+                            name: "",
+                            email: ""
+                        })
+                        setMessage("Data Added Successfully")
+                    } else {
+                        // Handle error from the action itself
+                        setMessage("Failed to add agent")
+                    }
+                    
+                    setTimeout(() => {
+                        setMessage("")
+                    }, 1500)
+                })
+                .catch((error) => {
+                    setMessage("Failed to add agent")
+                    setTimeout(() => {
+                        setMessage("")
+                    }, 1500)
+                })
+        }
     }
+
 return(<>
 <Header text={"Add New Sales Agent"}/>
 <main className="container">
@@ -65,6 +72,7 @@ return(<>
                 <button className="link-display" type="submit">Submit</button>
             </form>
             <h2>{message}</h2>
+           
         </div>
         </div></main></>)
 }

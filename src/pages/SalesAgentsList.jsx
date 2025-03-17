@@ -23,7 +23,10 @@ const SalesAgent=()=>
         <div className="content">
             {salesAgents.status==="loading"&&(<>
                 <h2 className="load">Loading...</h2></>)}
-        {salesAgents.status!=="loading" &&<><div className="addAgentContainer">
+                {(salesAgents.status=="error") && (<>
+                <h2 className="load">Failed to fetch agents Data</h2>
+                </>)}
+        {salesAgents.status!=="loading" && salesAgents.status!="error" &&<><div className="addAgentContainer">
                 <Link className="link-display" to={"/addagent"}>Add New Agent</Link>
             </div>
         <ul>

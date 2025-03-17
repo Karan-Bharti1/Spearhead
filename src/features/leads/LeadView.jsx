@@ -39,6 +39,9 @@ return matchesFilter
 return(<>
 {state.status==="loading" && (<>
 <h2 className="load">Loading...</h2></>)}
+{state.status=="error" && (<>
+<h2 className="main-heading">Failed to fetch leads Data</h2>
+</>)}
 {state.status==="succeeded" &&(<><p className="main-heading">Leads Management System</p>
     <div className="lead-status">
 
@@ -55,24 +58,24 @@ return(<>
 
 </div>
 <div className="lead-filter">
-<p><strong>Leads</strong></p>
 
-<div>
-<label htmlFor="filter"><strong>Quick Filter:</strong> </label>
+
+<div >
+<label htmlFor="filter"><strong> Filter:</strong> </label>
 <select id="filter" onChange={event=>setFilter(event.target.value)}>
-    <option value="">Select</option>
+    <option value="">Select Status</option>
     <option value="All">All</option>
     <option value="New">New</option>
     <option value="Contacted">Contacted</option>
     <option value="Qualified">Qualified</option>
     <option value="Closed">Closed</option>
+    <option value="Proposal Sent">Proposal Sent</option>
 </select>
 </div>
-<div><Link className="link-display" to="/addnewlead">Add New Lead</Link></div></div>
+<div><Link className="link-display" to="/addnewlead">New Lead</Link></div></div>
 
 <div className="lead-container">
-{
-displayLeads}
+{displayLeads}
 </div>
 
 </>)}

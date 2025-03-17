@@ -14,13 +14,13 @@ function App() {
      <main className='container'>
 <div className='page-display'>
   <div className='sidebar'>
-    <h2 className='sidebar-text'>Sidebar</h2>
+    <h2 className='sidebar-text'>Explore Us</h2>
 <Link className='btn-primary' to={"/leadlist"}>Leads</Link>
 <Link className='btn-primary' to={"/salesagents"}>Agents</Link>
 
 <Link className='btn-primary' to={"/reports"}>Reports</Link>
 <Link className='btn-primary' to={"/statusview"}>Status</Link>
-<Link className='btn-primary' to={'/salesagentview'}>Agent'sView</Link>
+<Link className='btn-primary' to={'/salesagentview'}>View</Link>
   </div>
   <div className='content'>
     <LeadView/>

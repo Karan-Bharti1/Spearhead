@@ -42,6 +42,7 @@ setCommentsData(comments.comments)
         <Link className='btn-primary' to="/">Dashboard</Link>
         </div>
         <div className="content">
+            {state.status=="error" && <h2 className="sec-heading">Failed To fetch lead details</h2>}
         {state.status==="loading" && (<>
             <h2 className="load">Loading...</h2></>)}
            {state.status==="succeeded" && (<>
@@ -54,7 +55,7 @@ setCommentsData(comments.comments)
                 <p><strong><span className="text-head">Status: </span></strong>{leadData?.status}</p>
                 <p><strong><span className="text-head">Time To Close: </span></strong>{leadData?.timeToClose}</p>
                 <p><strong><span className="text-head">Priority: </span></strong>{leadData?.priority}</p>
-                {leadData?.closedAt &&  <p><strong><span className="text-head">Closed At: </span></strong>{leadData?.closedAt.split("T").map(data=>data).join(", ")}</p>}
+                {leadData?.status==="Closed"&&leadData?.closedAt &&  <p><strong><span className="text-head">Closed At: </span></strong>{leadData?.closedAt.split("T").map(data=>data).join(", ")}</p>}
             </div>
             <div className="sales-content">
                <p className="sec-heading">Sales Agent</p>
@@ -68,13 +69,14 @@ setCommentsData(comments.comments)
             <div>
                 <p className="sec-heading">Comment Box</p>
                 <div className="comment-container">
-                    <form onClick={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <textarea  value={commentText} onChange={event=>setCommentText(event.target.value)} className="form-control" placeholder="Add a comment for the lead....." rows={10} required></textarea>
                         <button className="link-display" type="submit">Submit</button>
                     </form>
                 </div>
                
             </div>
+            {comments.status=="error" && <h2 className="sec-heading">Failed To Complete Request</h2>}
           {commentsData.length>0&&   (<div className="display-comment">
             <p className="sec-heading">Recent Comments</p>
                     {commentsData.map(comment=> (<div className="comment-box" key={comment._id}>
@@ -86,6 +88,7 @@ setCommentsData(comments.comments)
                          </div>)
                     )}
                 </div>)}
+              
                 {
                   comments.status!="loading" &&  commentsData.length==0 && <p className="sec-heading">No comments available. </p>
                 }
