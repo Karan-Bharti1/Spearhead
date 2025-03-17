@@ -107,14 +107,14 @@ const StatusView = () => {
                                     <div className="filteredLeadsByStatus">
                                         <div>
                                             <label><strong>Filters: </strong></label>{" "}
-                                            <select onChange={handleSalesPerson}>
+                                            <select onChange={handleSalesPerson} value={salesPerson}>
                                                 <option value="">Select Sales Agent</option>
-                                                <option value="All">All</option>
+                                             
                                                 {sales?.sales?.map(sale => (
                                                     <option key={sale._id} value={sale._id}>{sale.name}</option>
                                                 ))}
                                             </select>{" "}
-                                            <select onChange={handlePriority}>
+                                            <select onChange={handlePriority} value={selectedPriority}>
                                                 <option value="">Select Priority</option>
                                                 <option value="High">High</option>
                                                 <option value="Medium">Medium</option>
