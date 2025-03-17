@@ -204,7 +204,7 @@ const pieChartDataStatus={
             </div>
            <h2 className="sec-heading">Leads Closed Last Week</h2>
            <ul>
-           {leadsClosedLastWeek.leads?.map(lead=>(<li key={lead._id} className="leadList"><span ><Link to={`/viewdetails/${lead._id}`}>{lead.name} </Link></span>
+           {leadsClosedLastWeek.leads?.map(lead=>(<li key={lead._id} className="leadList"><span >{lead.name} </span>
             <span className="comment-text">~{lead.salesAgent}</span></li>))}
            </ul>
             </>)
