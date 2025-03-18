@@ -23,3 +23,17 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 **Backend:** Express.js with RESTful APIs, Mongoose for database interactions with MongoDB.
 
 **Database:** MongoDB with models for leads, sales agents, comments, and tags.
+
+## Key Features
+
+### Dashboard Screen
+- Sidebar navigation (Leads, Sales, Agents, Reports).
+- Display of leads categorized by status (New, Contacted, etc.).
+- Quick Filtering of leads by Status
+- Option to add new leads via a button.
+- Option View Details for any particular screen
+![image](https://github.com/user-attachments/assets/695c4f96-7976-43d7-9aed-6c55e0a12841)
+![image](https://github.com/user-attachments/assets/b411df03-25a0-4545-aac7-01c81c7148cb)
+
+
+### Lead Details Screen
