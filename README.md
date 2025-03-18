@@ -85,6 +85,7 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 
 ![image](https://github.com/user-attachments/assets/b411df03-25a0-4545-aac7-01c81c7148cb)
 
+
 ### Lead Details Screen
 ![image](https://github.com/user-attachments/assets/b4dd1635-7a86-48ed-be0f-3eeaca36e9ea)
 
@@ -96,14 +97,18 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 
 ![image](https://github.com/user-attachments/assets/b4a6701e-0549-42c5-bd03-8d4c9cd9aa39)
 
+
 ### Lead List Screen
 ![image](https://github.com/user-attachments/assets/1b377ca0-204e-43a1-9dc2-6215f26cb785)
+
 
 ### Sales Agent Management Screen
 ![image](https://github.com/user-attachments/assets/0225b42e-4b4d-41e9-839e-148ba993dedb)
 
+
 ### Add New Agent Screen
 ![image](https://github.com/user-attachments/assets/907091e6-98f8-4247-9e26-95890ad7c2d6)
+
 
 ### Reports
 ![image](https://github.com/user-attachments/assets/1045cd13-ce7d-4057-ba54-dbadf63e645e)
@@ -111,6 +116,7 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 ![image](https://github.com/user-attachments/assets/d35347d8-12a0-4a8b-9ff7-f0a805cecd7a)
 
 ![image](https://github.com/user-attachments/assets/79815e34-31bd-4738-be5b-4abf61f2514d)
+
 
 ### Lead Status View
 ![image](https://github.com/user-attachments/assets/d52689cc-962d-4f29-8f59-5f43bf1319b1)
