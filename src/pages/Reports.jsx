@@ -12,7 +12,6 @@ const Reports=()=>{
     const leads=useSelector(state=>state.leads)
    const sales=useSelector(state=>state.sales)
    const leadsClosedLastWeek=useSelector(state=>state.reports)
-   console.log(leadsClosedLastWeek)
     const [leadsData,setLeadsData]=useState([])
     const [salesAgent,setSalesAgent]=useState([])
     const dispatch=useDispatch()
@@ -158,10 +157,10 @@ const pieChartDataStatus={
         </div>
         <div className="content" >
           
-            {(leads.status=="loading" ||sales.status=="loading" || leadsClosedLastWeek.status=="loading") && (<>
+            {(leads.status=="loading" ||sales.status=="loading" ) && (<>
                 <h2 className="load">Loading...</h2>
                 </>)}
-                {(leads.status=="error" ||sales.status=="error" || leadsClosedLastWeek.status=="error") && (<>
+                {(leads.status==="error" ||sales.status==="error" || leadsClosedLastWeek.status==="error") && (<>
                 <h2 className="load">Failed to fetch reports data</h2>
                 </>)}
         {
@@ -204,9 +203,10 @@ const pieChartDataStatus={
             </div>
            <h2 className="sec-heading">Leads Closed Last Week</h2>
            <ul>
-           {leadsClosedLastWeek.leads?.map(lead=>(<li key={lead._id} className="leadList"><span >{lead.name} </span>
+           {leadsClosedLastWeek?.leads?.map(lead=>(<li key={lead._id} className="leadList"><span >{lead.name} </span>
             <span className="comment-text">~{lead.salesAgent}</span></li>))}
            </ul>
+           {leadsClosedLastWeek?.leads.length==0 && <h2  className="sec-heading">No Leads Found</h2>}
             </>)
         }
             </div></div>
